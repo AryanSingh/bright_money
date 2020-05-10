@@ -2,28 +2,20 @@ import React from 'react';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 var moment = require('moment');
-
-import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-// import Select from '@material-ui/core/Select';
 import Select from 'react-select';
 import { billsSelector, categorySelector } from '../selectors';
 import Card from '@material-ui/core/Card';
@@ -33,24 +25,16 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Bill from './Bill';
-
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-
 import { withStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import { withRouter } from 'react-router';
 import Modal from '@material-ui/core/Modal';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddIcon from '@material-ui/icons/Add';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import DateFnsAdapter from '@date-io/date-fns';
+import Timeline from './Timeline';
 
 var Loader = require('react-loader');
 
@@ -200,6 +184,7 @@ class Dashboard extends React.Component {
       editing: false,
       creating: true,
       bill: null,
+      timeModal: true,
     };
   }
 
@@ -216,7 +201,7 @@ class Dashboard extends React.Component {
       this.setState({ stateData: this.props.data });
     }
     if (prevState !== this.state) {
-      // console.log('updated state', this.state);
+      console.log('updated state', this.state);
     }
   }
 
@@ -226,6 +211,12 @@ class Dashboard extends React.Component {
       creating: false,
       editing: false,
       bill: null,
+    });
+  };
+
+  toggleTimeModal = () => {
+    this.setState({
+      timeModal: !this.state.timeModal,
     });
   };
 
@@ -271,6 +262,19 @@ class Dashboard extends React.Component {
             toggleModal={this.toggleModal}
           />
         </div>
+      </Modal>
+    );
+  };
+
+  renderTimeModal = () => {
+    return (
+      <Modal
+        open={this.state.timeModal}
+        onClose={this.toggleTimeModal}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <Timeline />
       </Modal>
     );
   };
@@ -376,7 +380,10 @@ class Dashboard extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Create New Bill" />
               </ListItem>
-              <ListItem button>
+              <ListItem
+                button
+                onClick={() => this.setState({ timeModal: true })}
+              >
                 <ListItemIcon>
                   <TimelineIcon />
                 </ListItemIcon>
@@ -387,6 +394,7 @@ class Dashboard extends React.Component {
         </Drawer>
         <main style={{ width: '100%' }}>
           {this.renderModal()}
+          {this.renderTimeModal()}
           <Container className={classes.cardGrid} maxWidth={false}>
             {/* End hero unit */}
             <Grid container spacing={4}>
