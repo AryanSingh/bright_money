@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import Dashboard from './containers/Dashboard';
-import Signup from './containers/Signup';
+import Signup from './containers/Bill';
 import Signin from './containers/Signin';
 import StudentProfile from './containers/StudentProfile';
 import {
@@ -35,9 +35,9 @@ function App() {
             </ErrorBoundary>
           </Route>
           {/*<Route exact path="/signup">*/}
-            {/*<ErrorBoundary>*/}
-              {/*<Signup />*/}
-            {/*</ErrorBoundary>*/}
+          {/*<ErrorBoundary>*/}
+          {/*<Signup />*/}
+          {/*</ErrorBoundary>*/}
           {/*</Route>*/}
           {/*<Route exact path="/signin">*/}
           {/*<ErrorBoundary>*/}
@@ -50,9 +50,9 @@ function App() {
             </ErrorBoundary>
           </PrivateRoute>
           {/*<PrivateRoute exact path="/:id">*/}
-            {/*<ErrorBoundary>*/}
-              {/*<StudentProfile />*/}
-            {/*</ErrorBoundary>*/}
+          {/*<ErrorBoundary>*/}
+          {/*<StudentProfile />*/}
+          {/*</ErrorBoundary>*/}
           {/*</PrivateRoute>*/}
           {/*<Route exact path="/:id">*/}
           {/*<ErrorBoundary>*/}

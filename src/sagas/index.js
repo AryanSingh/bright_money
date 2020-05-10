@@ -9,8 +9,18 @@ function* fetchData() {
   console.log('json', json);
   yield put({ type: 'DATA_RECEIVED', data: Object.values(json) });
 }
+
+function* createBill(action) {
+  yield put({ type: 'BILL_CREATE', data: action.data });
+}
+
+function* editBill(action) {
+  yield put({ type: 'BILL_EDIT', data: action.data });
+}
 function* actionWatcher() {
   yield takeLatest('GET_DATA', fetchData);
+  yield takeLatest('CREATE_BILL', createBill);
+  yield takeLatest('EDIT_BILL', editBill);
 }
 export default function* rootSaga() {
   yield all([actionWatcher()]);
