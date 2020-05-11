@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-var moment = require('moment');
 import styled from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -39,7 +38,7 @@ import AddIcon from '@material-ui/icons/Add';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import DateFnsAdapter from '@date-io/date-fns';
 import Timeline from './Timeline';
-import TextField from '@material-ui/core/TextField';
+var moment = require('moment');
 
 var Loader = require('react-loader');
 
