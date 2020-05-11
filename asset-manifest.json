@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/AryanSingh/bright_money/static/css/main.674a239e.chunk.css",
-    "main.js": "/AryanSingh/bright_money/static/js/main.de7a7044.chunk.js",
-    "main.js.map": "/AryanSingh/bright_money/static/js/main.de7a7044.chunk.js.map",
-    "runtime-main.js": "/AryanSingh/bright_money/static/js/runtime-main.4edd7f60.js",
-    "runtime-main.js.map": "/AryanSingh/bright_money/static/js/runtime-main.4edd7f60.js.map",
-    "static/js/2.911916af.chunk.js": "/AryanSingh/bright_money/static/js/2.911916af.chunk.js",
-    "static/js/2.911916af.chunk.js.map": "/AryanSingh/bright_money/static/js/2.911916af.chunk.js.map",
-    "index.html": "/AryanSingh/bright_money/index.html",
-    "precache-manifest.cf10f0d2f23c708aa50ae0f08edcdb83.js": "/AryanSingh/bright_money/precache-manifest.cf10f0d2f23c708aa50ae0f08edcdb83.js",
-    "service-worker.js": "/AryanSingh/bright_money/service-worker.js",
-    "static/css/main.674a239e.chunk.css.map": "/AryanSingh/bright_money/static/css/main.674a239e.chunk.css.map",
-    "static/js/2.911916af.chunk.js.LICENSE.txt": "/AryanSingh/bright_money/static/js/2.911916af.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/AryanSingh/bright_money/static/media/logo.ee7cd8ed.svg"
+    "main.css": "/bright_money/static/css/main.674a239e.chunk.css",
+    "main.js": "/bright_money/static/js/main.7c1b891f.chunk.js",
+    "main.js.map": "/bright_money/static/js/main.7c1b891f.chunk.js.map",
+    "runtime-main.js": "/bright_money/static/js/runtime-main.4d495b11.js",
+    "runtime-main.js.map": "/bright_money/static/js/runtime-main.4d495b11.js.map",
+    "static/js/2.4c52beeb.chunk.js": "/bright_money/static/js/2.4c52beeb.chunk.js",
+    "static/js/2.4c52beeb.chunk.js.map": "/bright_money/static/js/2.4c52beeb.chunk.js.map",
+    "index.html": "/bright_money/index.html",
+    "precache-manifest.c29b4677e5e4dfdb9f8f2058695ae1a6.js": "/bright_money/precache-manifest.c29b4677e5e4dfdb9f8f2058695ae1a6.js",
+    "service-worker.js": "/bright_money/service-worker.js",
+    "static/css/main.674a239e.chunk.css.map": "/bright_money/static/css/main.674a239e.chunk.css.map",
+    "static/js/2.4c52beeb.chunk.js.LICENSE.txt": "/bright_money/static/js/2.4c52beeb.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/bright_money/static/media/logo.ee7cd8ed.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4edd7f60.js",
-    "static/js/2.911916af.chunk.js",
+    "static/js/runtime-main.4d495b11.js",
+    "static/js/2.4c52beeb.chunk.js",
     "static/css/main.674a239e.chunk.css",
-    "static/js/main.de7a7044.chunk.js"
+    "static/js/main.7c1b891f.chunk.js"
   ]
 }
