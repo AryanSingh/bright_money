@@ -15,6 +15,19 @@ export const sortedBillsSelector = createSelector(billsSelector, (bills) => {
   return newArr;
 });
 
+export const sortedAmountSelector = createSelector(billsSelector, (bills) => {
+  let newArr = [...bills];
+  newArr = newArr.map((bill) => {
+    bill.amount = Number(bill.amount);
+    return bill;
+  });
+  newArr.sort((a, b) => {
+    // let total = Object.values(student.marks).reduce((a, b) => a + b, 0);
+    return new Date(b.amount) - new Date(a.amount);
+  });
+  return newArr;
+});
+
 export const categorySelector = createSelector(billsSelector, (bills) => {
   let newArr = [];
   bills.map((bill) => {

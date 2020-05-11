@@ -17,7 +17,11 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Select from 'react-select';
-import { billsSelector, categorySelector } from '../selectors';
+import {
+  billsSelector,
+  categorySelector,
+  sortedAmountSelector,
+} from '../selectors';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 
@@ -35,6 +39,7 @@ import AddIcon from '@material-ui/icons/Add';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import DateFnsAdapter from '@date-io/date-fns';
 import Timeline from './Timeline';
+import TextField from '@material-ui/core/TextField';
 
 var Loader = require('react-loader');
 
@@ -156,6 +161,9 @@ const styles = (theme) => ({
   MuiCardActionsRoot: {
     justifyContent: 'center',
   },
+  MuiFilledInputRoot: {
+    backgroundColor: '#FFFFFF',
+  },
 });
 
 const customStyles = {
@@ -184,7 +192,9 @@ class Dashboard extends React.Component {
       editing: false,
       creating: true,
       bill: null,
-      timeModal: true,
+      timeModal: false,
+      budget: null,
+      budgetIndices: [],
     };
   }
 
@@ -192,6 +202,7 @@ class Dashboard extends React.Component {
     if (this.props.data && this.props.data.length !== 0) {
       this.setState({ stateData: this.props.data });
     }
+
     // console.log('props', this.props);
   }
 
@@ -200,10 +211,30 @@ class Dashboard extends React.Component {
       // console.log('props', this.props);
       this.setState({ stateData: this.props.data });
     }
-    if (prevState !== this.state) {
+    if (prevState.budget !== this.state.budget) {
       console.log('updated state', this.state);
+      this.findHighlighted();
     }
   }
+
+  findHighlighted = () => {
+    let tempArr = [];
+    let currSum = 0;
+    let budget = this.state.budget;
+    // debugger
+    for (let i = 0; i < this.props.sortedData.length; i++) {
+      if (currSum < budget) {
+        if (currSum + this.props.sortedData[i].amount <= budget) {
+          currSum += this.props.sortedData[i].amount;
+          // debugger
+          tempArr.push(this.props.sortedData[i].id);
+        } else if (currSum + this.props.sortedData[i].amount > budget) {
+          continue;
+        }
+      }
+    }
+    this.setState({ budgetIndices: tempArr });
+  };
 
   toggleModal = () => {
     this.setState({
@@ -326,6 +357,18 @@ class Dashboard extends React.Component {
             >
               Bills
             </Typography>
+            <StyledInput
+              placeholder="Budget"
+              type="number"
+              id="lname"
+              name="lname"
+              value={String(this.state.budget)}
+              onChange={(event) =>
+                this.setState({ budget: Number(event.target.value) })
+              }
+              className={classes.MuiFilledInputRoot}
+            />
+
             <SelectContainer>
               <Select
                 className="basic-single"
@@ -402,7 +445,12 @@ class Dashboard extends React.Component {
                 this.state.stateData.length !== 0 &&
                 this.state.stateData.map((bill) => (
                   <Grid item key={bill.id} xs={12} sm={6} md={4} lg={3}>
-                    <Card className={classes.card}>
+                    <StyledCard
+                      className={classes.card}
+                      selected={
+                        this.state.budgetIndices.indexOf(bill.id) !== -1
+                      }
+                    >
                       <CardMedia
                         className={classes.cardMedia}
                         image="https://source.unsplash.com/random"
@@ -419,15 +467,18 @@ class Dashboard extends React.Component {
                         </Typography>
                       </CardContent>
                       <CardActions className={classes.MuiCardActionsRoot}>
-                        <Button
+                        <StyledButton
                           size="small"
                           color="primary"
+                          selected={
+                            this.state.budgetIndices.indexOf(bill.id) !== -1
+                          }
                           onClick={() => this.setEditedBill(bill)}
                         >
                           Edit Bill
-                        </Button>
+                        </StyledButton>
                       </CardActions>
-                    </Card>
+                    </StyledCard>
                   </Grid>
                 ))}
             </Grid>
@@ -442,6 +493,7 @@ const mapStateToProps = (state) => {
   return {
     data: billsSelector(state),
     categories: categorySelector(state),
+    sortedData: sortedAmountSelector(state),
     // loading: state.loading,
   };
 };
@@ -456,4 +508,47 @@ export default connect(
 
 const SelectContainer = styled.div`
   width: 20%;
+`;
+
+const StyledCard = styled(Card)`
+  background: ${(props) => (props.selected ? '#3F51B5' : 'White')};
+  color: ${(props) => (props.selected ? '#FFFFFF' : 'inherit')};
+`;
+
+const StyledButton = styled(Button)`
+  color: ${(props) => (props.selected ? '#FFFFFF' : '#3F51B5')};
+`;
+
+const StyledInput = styled.input`
+  height: 38px;
+  font-size: 16px;
+  webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: 38px;
+  outline: 0 !important;
+  position: relative;
+  -webkit-transition: all 100ms;
+  transition: all 100ms;
+  box-sizing: border-box;
+  width: 20%;
+  margin-right: 4px;
 `;
