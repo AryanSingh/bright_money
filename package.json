@@ -2,7 +2,6 @@
   "name": "embibe",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aryansingh.github.io/bright_money",
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.9.13",
@@ -51,8 +50,6 @@
     "singleQuote": true
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
